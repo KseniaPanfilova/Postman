@@ -1,0 +1,3801 @@
+{
+	"info": {
+		"_postman_id": "87e7f2ad-5544-4c74-9b24-8870aa58b6e6",
+		"name": "NASA_APOD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18343275"
+	},
+	"item": [
+		{
+			"name": "Param_Thumbs",
+			"item": [
+				{
+					"name": "APOD_Thumbs_true",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Thumbs true - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Thumbs true - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Thumbs true - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Thumbs true - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&thumbs=true&date=2014-12-08",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "thumbs",
+									"value": "true"
+								},
+								{
+									"key": "date",
+									"value": "2014-12-08"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Thumbs_false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Thumbs false - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Thumbs false - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Thumbs false - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Thumbs false - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&thumbs=false&date=2014-12-08",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "thumbs",
+									"value": "false"
+								},
+								{
+									"key": "date",
+									"value": "2014-12-08"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Thumbs_default_value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Thumbs false - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Thumbs false - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Thumbs false - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Thumbs false - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date=2014-12-08",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "2014-12-08"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Param_Date",
+			"item": [
+				{
+					"name": "APOD_Correct_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - correct date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - correct date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - correct date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Date - correct date - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{correctPastDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{correctPastDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Date_100_years_ago",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - date 100 years ago - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - date 100 years ago - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - date 100 years ago - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - date 100 years ago - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{date100YearsAgo}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{date100YearsAgo}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Min_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - minimum date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - minimum date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - minimum date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Date - minimum date - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{minDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{minDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Min_date-1_day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - date less than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - date less than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - date less than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - date less than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{oneDayBeforeMinDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{oneDayBeforeMinDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Max_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - maximum date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - maximum date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - maximum date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Date - maximum date - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{maxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{maxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Max_date+1_day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - date more than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - date more than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - date more than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - date more than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{oneDayAfterMaxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{oneDayAfterMaxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_0000-00-00",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - date with only nulls - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - date with only nulls - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - date with only nulls - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - date with only nulls - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date=0000-00-00",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "0000-00-00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Date_13_Month",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - date with 13th month - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - date with 13th month - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - date with 13th month - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - date with 13th month - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date=2021-13-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "2021-13-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Date_29_February",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - February 29 - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - February 29 - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - February 29 - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param Date - February 29 - Response contains right date\", function () {\r",
+									"    pm.expect(responseBody.date).to.eql(requestBody.date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date=2020-02-29",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "2020-02-29"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Date_31_April",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - April 31 - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - April 31 - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - April 31 - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - April 31 - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"day is out of range for month\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date=2022-04-31",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "2022-04-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Date_characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Date - characters - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Date - characters - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Date - characters - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Date - characters - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&date={{characters}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "date",
+									"value": "{{characters}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Param_Start_date",
+			"item": [
+				{
+					"name": "APOD_Correct_start_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - correct date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - correct date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - correct date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param Start date - correct date - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var currentDate = new Date();\r",
+									"    var endDate = currentDate.setHours(0, 0, 0, 0);\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 *60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{correctPastDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{correctPastDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Start_date_100_years_ago",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - date 100 years ago - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - date 100 years ago - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - date 100 years ago - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - date 100 years ago - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{date100YearsAgo}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{date100YearsAgo}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Min_start_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - minimum date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - minimum date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - minimum date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param Start date - correct date - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var currentDate = new Date();\r",
+									"    var endDate = currentDate.setHours(0, 0, 0, 0);\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 * 60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{minDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{minDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Min_start_date-1_day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - date less than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - date less than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - date less than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - date less than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{oneDayBeforeMinDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{oneDayBeforeMinDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Max_start_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - maximum date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - maximum date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - maximum date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param Start date - maximum date - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var currentDate = new Date();\r",
+									"    var endDate = currentDate.setHours(0, 0, 0, 0);\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 * 60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{currentDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{currentDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Max_start_date+1_day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - date more than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - date more than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - date more than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - date more than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{oneDayAfterMaxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{oneDayAfterMaxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_0000-00-00",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - date with only nulls - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - date with only nulls - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - date with only nulls - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - date with only nulls - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.start_date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date=0000-00-00",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "0000-00-00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Start_date_13_Month",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - date with 13th month - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - date with 13th month - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - date with 13th month - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - date with 13th month - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.start_date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date=2021-13-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-13-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Start_date_29_February",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - February 29 - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - February 29 - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - February 29 - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"PParam Start date - February 29 - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var currentDate = new Date();\r",
+									"    var endDate = currentDate.setHours(0, 0, 0, 0);\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 * 60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date=2020-02-29",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "2020-02-29"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Start_date_31_April",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - April 31 - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - April 31 - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - April 31 - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - April 31 - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"day is out of range for month\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date=2022-04-31",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "2022-04-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Start_date_characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - characters - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - characters - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - characters - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - characters - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.start_date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{characters}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{characters}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Start_date_with_param_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Start date - correct date plus param date - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Start date - correct date plus param date - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Start date - correct date plus param date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Start date - correct date plus param date - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Bad Request: invalid field combination passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date', 'thumbs'\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{correctPastDate}}&date={{correctPastDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{correctPastDate}}"
+								},
+								{
+									"key": "date",
+									"value": "{{correctPastDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Param_End_date",
+			"item": [
+				{
+					"name": "APOD_Correct_end_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - correct date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - correct date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - correct date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param End date - correct date - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var endDateString = requestBody.end_date;\r",
+									"    var endDate = new Date(endDateString.slice(0, 4), endDateString.slice(5, 7) - 1, endDateString.slice(8, 10));\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 *60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{correctPastDate}}&end_date={{maxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{correctPastDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{maxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_End_date_without_start_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - correct date plus param date - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - correct date plus param date - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - correct date plus param date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - correct date plus param date - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Bad Request: invalid field combination passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date', 'thumbs'\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&end_date={{correctPastDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{correctPastDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Min_end_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - minimum date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - minimum date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - minimum date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param End date - correct date - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var endDateString = requestBody.end_date;\r",
+									"    var endDate = new Date(endDateString.slice(0, 4), endDateString.slice(5, 7) - 1, endDateString.slice(8, 10));\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 * 60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{minDate}}&end_date={{minDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{minDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{minDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Min_end_date-1_day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - date less than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - date less than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - date less than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - date less than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&end_date={{oneDayBeforeMinDate}}&start_date={{oneDayBeforeMinDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{oneDayBeforeMinDate}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{oneDayBeforeMinDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Max_end_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - maximum date - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - maximum date - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - maximum date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param End date - maximum date - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var currentDate = new Date();\r",
+									"    var endDate = currentDate.setUTCHours(0, 0, 0, 0);\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 * 60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{maxDate}}&end_date={{maxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{maxDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{maxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Max_end_date+1_day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Date must be between Jun 16, 1995 and \" + maxDate + \".\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{oneDayAfterMaxDate}}&end_date={{oneDayAfterMaxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{oneDayAfterMaxDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{oneDayAfterMaxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_End_date_less_than_start_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - date more than minimum by one day - Response contains right message\", function () {\r",
+									"    maxDate = date.slice(4, 7) + \" \" + date.slice(8, 10) + \", \" + date.slice(11, 15);\r",
+									"    pm.expect(responseBody.msg).to.eql(\"start_date cannot be after end_date\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{maxDate}}&end_date={{correctPastDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{maxDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{correctPastDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_0000-00-00",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - date with only nulls - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - date with only nulls - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - date with only nulls - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - date with only nulls - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.end_date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&start_date={{correctPastDate}}&end_date=0000-00-00",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{correctPastDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "0000-00-00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_End_date_13_Month",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - date with 13th month - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - date with 13th month - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - date with 13th month - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - date with 13th month - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.end_date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&end_date=2021-13-01&start_date=2021-12-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "end_date",
+									"value": "2021-13-01"
+								},
+								{
+									"key": "start_date",
+									"value": "2021-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_End_date_29_February",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - February 29 - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - February 29 - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - February 29 - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"PParam End date - February 29 - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var startDateString = requestBody.start_date;\r",
+									"    var startDate = new Date(startDateString.slice(0, 4), startDateString.slice(5, 7) - 1, startDateString.slice(8, 10));\r",
+									"    var endDateString = requestBody.end_date;\r",
+									"    var endDate = new Date(endDateString.slice(0, 4), endDateString.slice(5, 7) - 1, endDateString.slice(8, 10));\r",
+									"    var countDays = Math.round((endDate - startDate) / (24 * 60 * 60 * 1000)) + 1;\r",
+									"    pm.expect(size).to.eql(countDays);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&end_date=2020-02-29&start_date=2020-02-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "end_date",
+									"value": "2020-02-29"
+								},
+								{
+									"key": "start_date",
+									"value": "2020-02-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_End_date_31_April",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - April 31 - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - April 31 - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - April 31 - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - April 31 - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"day is out of range for month\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&end_date=2022-04-31&start_date=2022-04-29",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "end_date",
+									"value": "2022-04-31"
+								},
+								{
+									"key": "start_date",
+									"value": "2022-04-29"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_End_date_Characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param End date - characters - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param End date - characters - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param End date - characters - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param End date - characters - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"time data '\" + requestBody.end_date + \"' does not match format '%Y-%m-%d'\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&end_date={{characters}}&start_date={{correctPastDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{characters}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{correctPastDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Param_Count",
+			"item": [
+				{
+					"name": "ADOP_Correct_count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - correct value - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - correct value - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - correct value - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param Count - correct value - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var count = requestBody.count;\r",
+									"    pm.expect(+count).to.eql(size);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{correctCount}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{correctCount}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Count_0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - is null - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - is null - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - is null - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Count - is null - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Count must be positive and cannot exceed 100\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count=0",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Max_count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - maximum value - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - maximum value - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - maximum value - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что в респонсе возвращается правильное количество записей\r",
+									"pm.test(\"Param Count - maximum value - Response contains right amount of elements\", function () {\r",
+									"    var size = Object.keys(responseBody).length;\r",
+									"    var count = requestBody.count;\r",
+									"    pm.expect(+count).to.eql(size);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{maxCount}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{maxCount}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Max_count+1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - value more than maximum - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - value more than maximum - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - value more than maximum - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Count - value more than maximum - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Count must be positive and cannot exceed 100\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{maxCountPlusOne}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{maxCountPlusOne}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Negative_count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - negative value - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - negative value - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - negative value - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Count - negative value - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Count must be positive and cannot exceed 100\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{negativeCount}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{negativeCount}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Count_characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - characters - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - characters - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - characters - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Count - characters - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"invalid literal for int() with base 10: '\" + requestBody.count + \"'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{characters}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{characters}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Count_with_param_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - with param date - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - with param date - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - with param date - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Count - with param date - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Bad Request: invalid field combination passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date', 'thumbs'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{correctCount}}&date={{maxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{correctCount}}"
+								},
+								{
+									"key": "date",
+									"value": "{{maxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADOP_Count_with_params_start_date_and_end_date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param Count - with params start and end dates - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param Count - with params start and end dates - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param Count - with params start and end dates - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"msg\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param Count - with params start and end dates - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.msg).to.eql(\"Bad Request: invalid field combination passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date', 'thumbs'\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}&count={{correctCount}}&start_date={{correctPastDate}}&end_date={{maxDate}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								},
+								{
+									"key": "count",
+									"value": "{{correctCount}}"
+								},
+								{
+									"key": "start_date",
+									"value": "{{correctPastDate}}"
+								},
+								{
+									"key": "end_date",
+									"value": "{{maxDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Param_API_key",
+			"item": [
+				{
+					"name": "APOD_Valid_api_key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param API key - correct value - Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param API key - correct value - Status code name is OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param API key - correct value - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"date\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"explanation\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"media_type\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"service_version\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.not.include(\"thumbnail_url\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"title\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"url\");    \r",
+									"});\r",
+									"\r",
+									"// проверяем, что возвращается верная дата\r",
+									"pm.test(\"Param API key - correct value - Response contains right date\", function () {\r",
+									"    var currentDate = new Date();\r",
+									"    var date = currentDate.getFullYear() + \"-\" + String(currentDate.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(currentDate.getDate()).padStart(2, \"0\");\r",
+									"    pm.expect(responseBody.date).to.eql(date);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key={{api-key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Invalid_api_key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param API key - invalid value - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param API key - invalid value - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Forbidden\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param API key - invalid value - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"error\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param API key - invalid value - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.error.message).to.include(\"An invalid api_key was supplied. Get one at https://api.nasa.gov:443\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key=123546fghjkl;567897yhjkl;867890",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "123546fghjkl;567897yhjkl;867890"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APOD_Without_api_key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// парсим респонс\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// парсим реквест\r",
+									"var requestBody = pm.request.url.query.toObject();\r",
+									"\r",
+									"var date = String(new Date());\r",
+									"\r",
+									"// проверяем статус код\r",
+									"pm.test(\"Param API key - no value - Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"// проверяем имя статус кода\r",
+									"pm.test(\"Param API key - no value - Status code name is Bad Request\", function () {\r",
+									"    pm.response.to.have.status(\"Forbidden\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что респонс содержит необходимые параметры\r",
+									"pm.test(\"Param API key - no value - Presence of necessary parameters\", function () {\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"error\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"code\");\r",
+									"    pm.expect(JSON.stringify(responseBody)).to.include(\"message\");\r",
+									"});\r",
+									"\r",
+									"// проверяем, что содержит правильное соощение\r",
+									"pm.test(\"Param API key - no value - Response contains right message\", function () {\r",
+									"    pm.expect(responseBody.error.message).to.include(\"No api_key was supplied. Get one at https://api.nasa.gov:443\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-key}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var date = new Date();",
+					"var minDateText = \"Jun 16, 1995\";",
+					"var maxCount = 100;",
+					"",
+					"// padStart - если число состоит из 1 цифры, то вперед допишится 0, чтобы сделать число двузначным",
+					"",
+					"// получаем текущую дату (она же максимально возможная дата)",
+					"var maxDate = date.getFullYear() + \"-\" + String(date.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(date.getDate()).padStart(2, \"0\");",
+					"pm.collectionVariables.set(\"maxDate\", maxDate); // присваиваем значение переменной коллекции",
+					"",
+					"// получаем дату 100 дет назад",
+					"var date100YearsAgo = date.getFullYear() - 100 + \"-\" + String(date.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(date.getDate()).padStart(2, \"0\");",
+					"pm.collectionVariables.set(\"date100YearsAgo\", date100YearsAgo);",
+					"",
+					"// получаем дату рандомную дату из прошлого в пределах 90 дней",
+					"var milSec = _.random(1, 90) * 24 * 60 * 60 * 1000; // высчитываем количество милисекунд",
+					"var pastDateMilSec = date.getTime() - milSec;",
+					"var pastDateFormated = new Date(pastDateMilSec);",
+					"var correctPastDate = pastDateFormated.getFullYear() + \"-\" + String(pastDateFormated.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(pastDateFormated.getDate()).padStart(2, \"0\"); ",
+					"pm.collectionVariables.set(\"correctPastDate\", correctPastDate);",
+					"",
+					"// получаем минимальную дату",
+					"var minDateMilSec = Date.parse(minDateText);",
+					"var minDateMilSecFoprmated = new Date(minDateMilSec);",
+					"var minDate = minDateMilSecFoprmated.getFullYear() + \"-\" + String(minDateMilSecFoprmated.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(minDateMilSecFoprmated.getDate()).padStart(2, \"0\"); ",
+					"pm.collectionVariables.set(\"minDate\", minDate);",
+					"",
+					"// получаем минимальную дату - 1 день",
+					"var oneDayMilSec = 24 * 60 * 60 * 1000;",
+					"var oneDayBeforeMinDateFormated = new Date(minDateMilSec - oneDayMilSec);",
+					"var oneDayBeforeMinDate = oneDayBeforeMinDateFormated.getFullYear() + \"-\" + String(oneDayBeforeMinDateFormated.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(oneDayBeforeMinDateFormated.getDate()).padStart(2, \"0\"); ",
+					"pm.collectionVariables.set(\"oneDayBeforeMinDate\", oneDayBeforeMinDate);",
+					"",
+					"// получаем максимальную дату + 1",
+					"var oneDayAfterMaxDateMilSec = date.getTime() + oneDayMilSec;",
+					"var oneDayAfterMaxDateFormated = new Date(oneDayAfterMaxDateMilSec);",
+					"var oneDayAfterMaxDate = oneDayAfterMaxDateFormated.getFullYear() + \"-\" + String(oneDayAfterMaxDateFormated.getMonth() + 1).padStart(2, \"0\") + \"-\" + String(oneDayAfterMaxDateFormated.getDate()).padStart(2, \"0\"); ",
+					"pm.collectionVariables.set(\"oneDayAfterMaxDate\", oneDayAfterMaxDate);",
+					"",
+					"// устанавливаем макс количество записей в переменные коллекции",
+					"pm.collectionVariables.set(\"maxCount\", maxCount);",
+					"",
+					"// получаем валидное количество записей",
+					"var correctCount = _.random(1, maxCount);",
+					"pm.collectionVariables.set(\"correctCount\", correctCount);",
+					"",
+					"// получаем максимальное количество записей + 1",
+					"pm.collectionVariables.set(\"maxCountPlusOne\", maxCount + 1);",
+					"",
+					"//получаем негативное число для количества записей",
+					"pm.collectionVariables.set(\"negativeCount\", 1 - _.random(2, 200));",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api-key",
+			"value": "EG7baldBNoJ7BjQnyXWvuwonDxH5AQofsanPUwNu",
+			"type": "string"
+		},
+		{
+			"key": "date",
+			"value": ""
+		},
+		{
+			"key": "currentDate",
+			"value": ""
+		},
+		{
+			"key": "date100YearsAgo",
+			"value": ""
+		},
+		{
+			"key": "correctPastDate",
+			"value": ""
+		},
+		{
+			"key": "oneDayBeforeMinDate",
+			"value": ""
+		},
+		{
+			"key": "oneDayAfterMaxDate",
+			"value": ""
+		},
+		{
+			"key": "characters",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "minDate",
+			"value": ""
+		},
+		{
+			"key": "maxDate",
+			"value": ""
+		},
+		{
+			"key": "correctCount",
+			"value": ""
+		},
+		{
+			"key": "maxCount",
+			"value": ""
+		},
+		{
+			"key": "maxCountPlusOne",
+			"value": ""
+		},
+		{
+			"key": "negativeCount",
+			"value": ""
+		}
+	]
+}
